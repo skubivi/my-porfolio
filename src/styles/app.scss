@@ -1,0 +1,111 @@
+.app {
+    min-height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    .navbar {
+        display: flex;
+        position: fixed;
+        background-color: rgba(167, 167, 167, 0.6);
+        justify-content: space-evenly;
+        @media (min-width: 700px) {
+            flex-direction: column;
+            $navbar-width: 60px;
+            border-radius: $navbar-width / 2;
+            height: 40vh;
+            width: $navbar-width;
+            top: 30vh;
+            left: calc(95vw - $navbar-width);
+            div#home:hover::after {
+                content: 'Home';
+            }
+            div#person:hover::after {
+                content: 'About me';
+            }
+            div#overview_key:hover::after {
+                content: 'Works';
+            }
+            div#chat:hover::after {
+                content: 'Contact me'
+            }
+            div:hover::before {
+                content: '';
+                position: absolute;
+                left: -20px;
+                height: 15px;
+                width: 15px;
+                background-color: white;
+                rotate: 45deg;
+            }
+            div:hover::after {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                color: black;
+                position: absolute;
+                left: -160px;
+                width: 150px;
+                border-radius: 5px;
+                height: 8%;
+            }
+            div:hover {
+                cursor: pointer;
+            }
+            
+            
+        }
+        @media (max-width: 700px) {
+            $navbar-height: 80px;
+            height: $navbar-height;
+            width: 100%;
+            top: calc(100vh - $navbar-height);
+        }
+        div {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+                color: white;
+            }
+        }
+        
+        .active {
+            color: red;
+        }
+    }
+
+    .wrapper {
+        $wrapper-width: 60vw;
+        margin-left: (100vw - $wrapper-width) / 2;
+        width: $wrapper-width;
+        .header {
+            height: 10vh;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            div {
+                display: flex;
+                flex-direction: row;
+                p {
+                    font-size: 24px;
+                    color: white;
+                }
+                #surname {
+                    letter-spacing: 2px;
+                    margin-left: 10px;
+                }
+                i {
+                    font-size: 24px;
+                    margin-left: 10px;
+                }
+            }
+        }
+        @media (max-width: 700px) {
+            margin-left: 20px;
+            width: calc(100% - 40px);
+        }
+    }
+}
