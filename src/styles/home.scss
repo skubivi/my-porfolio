@@ -5,4 +5,123 @@
         top: 0;
         height: 100vh;
     }
+
+    .explosion {
+        position: absolute;
+        z-index: -1;
+        background: none;
+        mix-blend-mode: color-dodge;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        @media (max-width: 1000px) {
+            display: none;
+        }
+    }
+
+    .avatar {
+        position: absolute;
+        top: 0;
+        left: 55vw;
+        background: none;
+        @media (max-width: 1600px) {
+            left: 45vw;
+        }
+        @media (max-width: 1400px) {
+            left: 35vw;
+        }
+        @media (max-width: 1200px) {
+            left: 22vw;
+        }
+        @media (max-width: 1000px) {
+            display: none;
+        }
+        animation-name: start;
+        animation-duration: 2s;
+        @keyframes start {
+            from {
+                top: 50px;
+                opacity: 0;
+            }
+            to {
+                top: 0;
+                opacity: 1;
+            }
+        }
+    }
+
+    
+
+    div {
+        color: white;
+        display: flex;
+        height: 90vh;
+        width: 50%;
+        flex-direction: column;
+        justify-content: center;
+        #title {
+            display: flex;
+            flex-direction: row;
+            font-size: 48px;
+            animation: startTitle;
+            animation-duration: 6s;
+            @keyframes startTitle {
+                from {
+                    margin-left: -20px;
+                    opacity: 0;
+                }
+                to {
+                    margin-left: 0;
+                    opacity: 1;
+                }
+            }
+        }
+        @media (max-width: 1000px) {
+            align-items: center;
+            width: 100%;
+        }
+
+        .imageContainer {
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            max-width: 141px;
+            max-height: 148px;
+            @media (max-height: 560px) {
+                display: none;
+            }
+            img {
+                position: absolute;
+                animation: spin;
+                animation-duration: 10s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+
+                @keyframes spin {
+                    from {
+                        transform: rotate(0);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+            }
+            .star {
+                width: 170px;
+            }
+            .arrow {
+                font-size: 48px;
+                transition: 0.5s;
+            }
+        }
+        .imageContainer:hover {
+            cursor: pointer;
+                .arrow {
+                    margin-left: 20px;
+                }
+        }
+    }
 }

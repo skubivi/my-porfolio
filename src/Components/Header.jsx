@@ -7,8 +7,8 @@ const Header = () => {
                 <p style={{color: 'red'}}>.</p>
             </div>
             <div>
-                <a href="https://vk.com/miracleme10k" target="_blank"><i className="fa fa-vk" style={{color: 'white'}}></i></a>
-                <a href="https://t.me/skubivi" target="_blank"><i className="fa fa-telegram" style={{color: 'white'}}></i></a>
+                <a href="https://vk.com/miracleme10k" target="_blank"><i className="fa fa-vk"></i></a>
+                <a href="https://t.me/skubivi" target="_blank"><i className="fa fa-telegram"></i></a>
             </div>
         </div>
     )

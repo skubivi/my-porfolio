@@ -16,7 +16,7 @@ const ParticleContainer = (props) => {
 
     const runFromMouse = (point, mouseX, mouseY) => {
         if (isNaN(mouseX)) return point
-        const radius = 100
+        const radius = 150
         const deltaX = point.x - mouseX
         const deltaY = point.y - mouseY
         const hypo = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
@@ -83,7 +83,7 @@ const ParticleContainer = (props) => {
                 const deltaX = -point.x + point.target[0]
                 const deltaY = -point.y + point.target[1]
                 const hypo = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
-                if (hypo <= 1) {
+                if (hypo <= 20) {
                     point.target = 'none'
                     newVX = Math.random() - 0.5
                     newVY = Math.random() - 0.5

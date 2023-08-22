@@ -14,7 +14,7 @@ const Canvas = (props) => {
         canvas.width = width
         canvas.height = height
         const context = canvas.getContext('2d')
-        const maxRadius = 150
+        const maxRadius = 200
         for (let i = 0; i < props.dots.length; i++) {
             for (let j = i+1; j < props.dots.length; j++) {
                 const deltaX = props.dots[i].x - props.dots[j].x

@@ -14,7 +14,7 @@
             height: 40vh;
             width: $navbar-width;
             top: 30vh;
-            left: calc(95vw - $navbar-width);
+            left: calc(98vw - $navbar-width);
             div#home:hover::after {
                 content: 'Home';
             }
@@ -30,9 +30,9 @@
             div:hover::before {
                 content: '';
                 position: absolute;
-                left: -20px;
-                height: 15px;
-                width: 15px;
+                left: -17px;
+                height: 10px;
+                width: 10px;
                 background-color: white;
                 rotate: 45deg;
             }
@@ -46,14 +46,15 @@
                 left: -160px;
                 width: 150px;
                 border-radius: 5px;
-                height: 8%;
+                height: 20px;
             }
         }
-        @media (max-width: 700px) {
+        @media (max-width: 699px) {
             $navbar-height: 55px;
             height: $navbar-height;
             width: 100vw;
             top: calc(100vh - $navbar-height);
+            left: 0
             a{
                 width: 100%;
             }
@@ -98,10 +99,14 @@
                 margin-left: 10px;
             }
             a{
+                color: white;
                 z-index: 1;
                 i {
                     font-size: 24px;
                     margin-left: 10px;
+                }
+                :hover {
+                    color: red;
                 }
             }
             
@@ -153,8 +158,21 @@
         width: $wrapper-width;
 
         @media (max-width: 700px) {
+            width: 90vw;
+            margin-left: 5vw;
+        }
+    }
+
+    .topLeftImg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: none;
+        z-index: -1;
+        mix-blend-mode: color-dodge;
+
+        @media (max-width: 450px) {
             width: 100%;
-            margin-left: 0;
         }
     }
 }
