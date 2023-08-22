@@ -1,7 +1,10 @@
-const Home = () => {
+import ParticleContainer from "../Components/ParticleContainer"
+import '../styles/home.scss'
+
+const Home = (props) => {
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="home">
+            <ParticleContainer mouseXY={props.mouseXY} />
         </div>
     )
 }

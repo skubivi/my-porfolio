@@ -4,7 +4,8 @@
     .navbar {
         display: flex;
         position: fixed;
-        background-color: rgba(167, 167, 167, 0.6);
+        z-index: 100;
+        background-color: rgba(167, 167, 167, 0.5);
         justify-content: space-evenly;
         @media (min-width: 700px) {
             flex-direction: column;
@@ -47,17 +48,15 @@
                 border-radius: 5px;
                 height: 8%;
             }
-            div:hover {
-                cursor: pointer;
-            }
-            
-            
         }
         @media (max-width: 700px) {
-            $navbar-height: 80px;
+            $navbar-height: 55px;
             height: $navbar-height;
-            width: 100%;
+            width: 100vw;
             top: calc(100vh - $navbar-height);
+            a{
+                width: 100%;
+            }
         }
         div {
             height: 100%;
@@ -69,43 +68,93 @@
                 color: white;
             }
         }
+
+        div:hover {
+            cursor: pointer;
+        }
         
         .active {
             color: red;
         }
     }
 
-    .wrapper {
-        $wrapper-width: 60vw;
-        margin-left: (100vw - $wrapper-width) / 2;
-        width: $wrapper-width;
-        .header {
-            height: 10vh;
-            width: 100%;
+    .header {
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        div {
             display: flex;
             flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            div {
-                display: flex;
-                flex-direction: row;
-                p {
-                    font-size: 24px;
-                    color: white;
-                }
-                #surname {
-                    letter-spacing: 2px;
-                    margin-left: 10px;
-                }
+            p {
+                z-index: 1;
+                font-size: 24px;
+                color: white;
+                letter-spacing: 2px;
+            }
+            #surname {
+                margin-left: 10px;
+            }
+            a{
+                z-index: 1;
                 i {
                     font-size: 24px;
                     margin-left: 10px;
                 }
             }
+            
         }
+
         @media (max-width: 700px) {
-            margin-left: 20px;
-            width: calc(100% - 40px);
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .transition {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+
+        animation-name: slidein;
+        animation-duration: 1s;
+        @keyframes slidein {
+            from {
+                left: 100vw
+            }
+            to {
+                left: 0
+            }
+        }
+    }
+
+    .transition-out {
+        left: 100vw;
+        animation-name: slideout;
+        animation-duration: 1s;
+        @keyframes slideout {
+            from {
+                left: 0
+            }
+            to {
+                left: 100vw
+            }
+        }
+    }
+        
+    .wrapper {
+        $wrapper-width: 60vw;
+        margin-left: (100vw - $wrapper-width) / 2;
+        width: $wrapper-width;
+
+        @media (max-width: 700px) {
+            width: 100%;
+            margin-left: 0;
         }
     }
 }
