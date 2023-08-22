@@ -13,7 +13,7 @@ const Navbar = (props) => {
     const handleClick = (e) => {
         if(props.active) {
             for (let i = 0; i < list.length; i++) {
-                if (list[i][0] === e.target.id)
+                if (list[i][0] === e.target.id && location.pathname !== list[i][2])
                     props.handleClick(list[i][2])
             }
         }
