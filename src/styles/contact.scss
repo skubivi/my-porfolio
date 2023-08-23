@@ -1,0 +1,90 @@
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    p {
+        font-size: 48px;
+        color: white;
+        @media (max-height: 554px) {
+            display: none;
+        }
+        @media (max-width: 499px) {
+            @media (max-height: 749px) {
+                display: none;
+            }
+        }
+    }
+    .form {
+        width: 60%;
+        min-width: 500px;
+        display: flex;
+        flex-direction: column;
+        @media (max-width: 499px) {
+            min-width: 0;
+            width: 100%;
+        }
+        textarea {
+            resize: none;
+            border-radius: 5px;
+            border-color: rgba(110, 110, 110, 0.5);
+            background: none;
+            color: white;
+            padding-top: 15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-size: 15px;
+            height: 30px;
+            overflow: hidden;
+        }
+        textarea:focus {
+            outline: 1px solid;
+            outline-color: red;
+            border-color: red;
+        }
+        .formHeader {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            .areaHeader {
+                width: 100%;
+            }
+            .areaHeader:last-child {
+                margin-left: 20px;
+            }
+            @media (max-width: 499px) {
+                flex-direction: column;
+                .areaHeader {
+                    width: calc(100% - 30px);
+                }
+                .areaHeader:last-child {
+                    margin-left: 0px;
+                    margin-top: 20px;
+                    
+                }
+            }
+        }
+        .areaBody {
+            margin-top: 20px;
+            width: calc(100% - 30px);
+        }
+        #message {
+            height: 120px;
+            overflow: hidden;
+        }
+        button {
+            color: white;
+            margin-top: 20px;
+            align-self: flex-start;
+            width: 200px;
+            height: 49px;
+            border-radius: 25px;
+            border-color: white;
+            background: none;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+    }
+}

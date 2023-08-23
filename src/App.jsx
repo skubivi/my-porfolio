@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './Components/Header';
 import Navbar from './Components/Navbar';
 import './styles/app.scss';
@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import useWindowSize from './Hooks/useWindowSize';
 import Transitions from './Components/Transitions';
 import topLeftImg from './Images/top-left-img.png'
+import circlesImg from './Images/circles.png'
 
 function App() {
   let mouseXY = []
@@ -43,6 +44,7 @@ function App() {
       </div>
       <Navbar handleClick={transition} active={true}/>
       <img className="topLeftImg" src={topLeftImg} alt='' />
+      <img className="circlesImg" src={circlesImg} alt='' />
     </div>
   );
 }
