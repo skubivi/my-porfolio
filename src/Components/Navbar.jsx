@@ -28,6 +28,7 @@ const Navbar = (props) => {
             </div>
         )
     })
+
     return (
         <div className="navbar">
             {resultList}

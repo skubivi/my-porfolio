@@ -11,10 +11,12 @@
         @media (min-width: 700px) {
             flex-direction: column;
             $navbar-width: 60px;
-            border-radius: $navbar-width / 2;
-            height: 40vh;
+            border-radius: calc($navbar-width / 2);
+            $navbar-height: max(50vh, 280px);
+            height: $navbar-height;
             width: $navbar-width;
-            top: 30vh;
+            top: 50%;
+            transform: translateY(-50%);
             left: calc(98vw - $navbar-width);
             div#home:hover::after {
                 content: 'Home';
@@ -81,7 +83,7 @@
     }
 
     .header {
-        height: 10vh;
+        min-height: 120px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -95,9 +97,6 @@
                 font-size: 24px;
                 color: white;
                 letter-spacing: 2px;
-            }
-            #surname {
-                margin-left: 10px;
             }
             a{
                 color: white;
@@ -155,10 +154,10 @@
         
     .wrapper {
         $wrapper-width: 60vw;
-        margin-left: (100vw - $wrapper-width) / 2;
         width: $wrapper-width;
-
-        @media (max-width: 700px) {
+        margin-left: calc((100vw - $wrapper-width) / 2);
+    
+        @media (max-width: 699px) {
             width: 90vw;
             margin-left: 5vw;
         }

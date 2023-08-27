@@ -133,7 +133,7 @@ const Works = () => {
         const currentActive = active === i
         projectCards.push(
             <ProjectCard 
-                key={i} 
+                key={i + projects.length} 
                 title={projects[i].title} 
                 url={projects[i].url} 
                 description={projects[i].description} 
@@ -155,10 +155,10 @@ const Works = () => {
     
     return (
         <div className='works'>
-            <p className='title'>Мои работы<font color='red'>.</font></p>
+            <p className='title'><b>Мои <font color='red'>работы</font></b></p>
             <div className='projectContainer'>
                 <div className='arrow' onClick={previous}>
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         arrow_back_ios
                     </span>
                 </div>
@@ -166,7 +166,7 @@ const Works = () => {
                     {projectCards}
                 </div>
                 <div className='arrow' onClick={next}>
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         arrow_forward_ios
                     </span>
                 </div>

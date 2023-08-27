@@ -2,9 +2,7 @@ const Header = () => {
     return (
         <div className="header">
             <div>
-                <p id="name"><b>Степан</b></p>
-                <p id="surname">Васильев</p>
-                <p style={{color: 'red'}}>.</p>
+                <p><b>СТЕПАН </b>ВАСИЛЬЕВ<font color='red'>.</font></p>
             </div>
             <div>
                 <a href="https://vk.com/miracleme10k" target="_blank"><i className="fa fa-vk"></i></a>

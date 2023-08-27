@@ -12,11 +12,11 @@ const Home = (props) => {
         <div className="home">
             <ParticleContainer mouseXY={props.mouseXY} />
             <div>
-                <p id="title"><b>Fronted React <font color='red'>Разработчик</font></b></p>
+                <p id="title"><b>Frontend React <font color='red'>Разработчик</font></b></p>
                 <div className="imageContainer" onClick={handleClick}>
                     <img className="text" src={roundedText} alt="" />
                     <img className='star' src={roundedStar} alt="" />
-                    <span class="material-symbols-outlined arrow">
+                    <span className="material-symbols-outlined arrow">
                         arrow_right_alt
                     </span>
                 </div>
