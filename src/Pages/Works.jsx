@@ -28,7 +28,7 @@ const Works = () => {
             image: tagImage
         },
         {
-            title: "ВК бот, по управлению ПК",
+            title: "ВК бот по управлению ПК",
             url: 'https://github.com/skubivi/ComputerControlVKBot',
             description: 'Pet-проект для управления компьютером с помощью бота во Вконтакте. Все доступные команды, как и их описание указаны на странице репозитория.',
             func: () => {
