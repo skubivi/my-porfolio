@@ -16,11 +16,17 @@ import useWindowSize from "../Hooks/useWindowSize";
 import AboutCard from '../Components/AboutCard'
 import { useEffect, useState } from 'react'
 
-const About = () => {
-    const windowSize = useWindowSize()
-    const [active, setActive] = useState([false, false, false, false, false])
-    const [navigationActive, setNavigationActive] = useState(2)
-    const setNewActive = (i) => {
+import * as React from 'react';
+
+const About:React.FC = () => {
+    const windowSize:WindowSizeType = useWindowSize()
+
+    const [active, setActive] = useState<Array<boolean>>([false, false, false, false, false])
+
+    const [navigationActive, setNavigationActive] = useState<number>(2)
+
+    type SetNewActiveType = (i: number) => void
+    const setNewActive: SetNewActiveType = (i) => {
         if(windowSize[0] < 1015)
             setNavigationActive(i)
         if (active[i]) setActive([false, false, false, false, false])
@@ -28,7 +34,14 @@ const About = () => {
             setActive(prev => prev.map((element, index) => index === i ? true : false))
         }
     }
-    const info = [
+
+    type InfoType = {
+        func: React.MouseEventHandler
+        title: string,
+        text: string,
+        images?: Array<string>
+    }
+    const info: Array<InfoType> = [
         {
             func: (e) => {setNewActive(0)},
             title: '2019 год',
@@ -61,7 +74,7 @@ const About = () => {
         },
     ]
 
-    const infoJSX = []
+    const infoJSX: Array<React.ReactNode> = []
     for (let i = 0; i < info.length; i++) {
         infoJSX.push(<AboutCard key={i * 2} title={info[i].title} text={info[i].text} active={active[i]} func={info[i].func} images={info[i].images}/>)
         if (active[i] || active[i+1]) {
@@ -73,21 +86,21 @@ const About = () => {
     }
     infoJSX.pop()
 
-    const handleClick = (e) => {
-        if (e.target.className === 'cardsContainer') setActive([false, false, false, false, false])
+    const handleClick: React.MouseEventHandler = (e) => {
+        if ((e.target as Element).className === 'cardsContainer') setActive([false, false, false, false, false])
     }
 
     
-    const points = []
+    const points: Array<React.ReactNode> = []
     for (let i = 0; i < info.length; i++) {
-        let style = {}
+        let style: {backgroundColor?: string} = {}
         if (i === navigationActive) style = {backgroundColor: 'red'}
         points.push(
             <div className='point' style={style} key={i}/>
         )
     }
 
-    const next = (e) => {
+    const next: React.MouseEventHandler = (e) => {
         setActive([false, false, false, false, false])
         setNavigationActive(prev => {
             if (prev + 1 >= info.length) return prev
@@ -95,7 +108,7 @@ const About = () => {
         })
     }
 
-    const prev = (e) => {
+    const prev: React.MouseEventHandler = (e) => {
         setActive([false, false, false, false, false])
         setNavigationActive(prev => {
             if (prev - 1 >= info.length) return prev
@@ -103,12 +116,11 @@ const About = () => {
         })
     }
 
-    const elementWidth = 90
-    console.log(elementWidth);
-    const activeElementWidth = 300
-    const hrWidth = 40;
-    const activeHrWidth = 1000
-    let currentActive = -1
+    const elementWidth: number = 90
+    const activeElementWidth: number = 300
+    const hrWidth: number = 40;
+    const activeHrWidth: number = 1000
+    let currentActive: number = -1
     for (let i = 0; i < info.length; i++) {
         if (active[i]) {
             currentActive = i
@@ -116,7 +128,8 @@ const About = () => {
         }
     }
 
-    const getLeft = () => {
+    type GetLeftType = () => number
+    const getLeft: GetLeftType = () => {
         if (currentActive < 0 && navigationActive === 2) return -1
         if (currentActive < 0) {
             let result = navigationActive * (elementWidth + hrWidth) + elementWidth / 2
@@ -126,14 +139,14 @@ const About = () => {
         if (currentActive > 0) result += activeHrWidth - hrWidth
         return result
     }
-    let style = {}
+    let style: {transform?: string} = {}
     if (getLeft() > 0) {
         style = {
             transform: 'translateX(' + -getLeft() + 'px)'
         }
     }
 
-    const windowWidth = windowSize[0]
+    const windowWidth: number = windowSize[0]
     useEffect(() => {
         setActive([false, false, false, false, false])
         setNavigationActive(2)

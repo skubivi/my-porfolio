@@ -1,88 +1,95 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import useWindowSize from "../Hooks/useWindowSize";
 import Canvas from "./Canvas";
+import * as React from 'react'
 
-const ParticleContainer = (props) => {
+type ParticleContainerType = {
+    mouseXY: MouseXYType
+}
+
+const ParticleContainer: React.FC<ParticleContainerType> = ({mouseXY}) => {
     const maxWidth = 1200
-    let windowSize = useWindowSize()
-    let width = maxWidth < windowSize[0] ? maxWidth : windowSize[0]
-    let height = windowSize[1]
+    let windowSize: WindowSizeType = useWindowSize()
+    let width: number = maxWidth < windowSize[0] ? maxWidth : windowSize[0]
+    let height: number = windowSize[1]
+
     const styleObj = {
         width: width + 'px',
         left: windowSize[0] - width + 'px'
     }
+    
+    const [points, setPoints] = useState<Array<PointType>>([])
 
-    const [points, setPoints] = useState([])
-
-    const runFromMouse = (point, mouseX, mouseY) => {
+    type RunFromMouseType = (point: PointType, mouseX: number, mouseY: number) => PointType
+    const runFromMouse: RunFromMouseType = (point, mouseX, mouseY) => {
         if (isNaN(mouseX)) return point
-        const radius = 150
-        const deltaX = point.x - mouseX
-        const deltaY = point.y - mouseY
-        const hypo = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+        const radius: number = 150
+        const deltaX: number = point.x - mouseX
+        const deltaY: number = point.y - mouseY
+        const hypo: number = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
         if (hypo > radius) return point
-        const ratio = hypo / radius
-        const newX = deltaX / ratio + point.x
-        const newY = deltaY / ratio + point.y
+        const ratio: number = hypo / radius
+        const newX: number = deltaX / ratio + point.x
+        const newY: number = deltaY / ratio + point.y
         return {
             ...point,
             target: [newX, newY]
         }
     }
 
-    const pointsInComponent = []
+    const pointsInComponent: Array<React.ReactNode> = []
     for (let i = 0; i < points.length; i++) {
         const pointStyle = {
-            position: 'absolute',
-            zIndex: '-1',
             left: Math.floor(points[i].x - points[i].r) + 'px',
             top: Math.floor(points[i].y - points[i].r) + 'px',
             width: points[i].r + 'px',
             height: points[i].r + 'px',
-            borderRadius: points[i].r / 2 + 'px',
-            background: 'rgba(255, 255, 51, 0.5)'
+            borderRadius: points[i].r / 2 + 'px'
         }
         pointsInComponent.push(
-            <div key={i} style={pointStyle} />
+            <div key={i} style={pointStyle} className="point" />
         )
     }
 
     useEffect(() => {
-        const makePoint = () => {
-            const x = Math.floor(Math.random() * width)
-            const y = Math.floor(Math.random() * height)
-            const vX = Math.random() - 0.5
-            const vY = Math.random() - 0.5
-            const r = Math.floor(Math.random() * 5 + 5)
+        type MakePointType = () => PointType
+        const makePoint: MakePointType = () => {
+            const x: number = Math.floor(Math.random() * width)
+            const y: number = Math.floor(Math.random() * height)
+            const vX: number = Math.random() - 0.5
+            const vY: number = Math.random() - 0.5
+            const r: number = Math.floor(Math.random() * 5 + 5)
             return {
                 x, y, vX, vY, r, target: 'none'
             }
         }
 
-        const makePoints = () => {
-            let maxPointsLength = 100
+        type MakePointsType = () => Array<PointType>
+        const makePoints: MakePointsType = () => {
+            let maxPointsLength: number = 100
             if (width < maxWidth) {
                 maxPointsLength = Math.floor(maxPointsLength * width / maxWidth)
             }
-            const result = []
+            const result: Array<PointType> = []
             for (let i = 0; i < maxPointsLength; i++) {
                 result.push(makePoint())
             }
             return result
         }
 
-        const makeMove = (point) => {
+        type MakeMoveType = (point: PointType) => PointType
+        const makeMove: MakeMoveType = (point) => {
             if (isNaN(point.x)) return makePoint()
-            let newVX = point.vX
-            let newVY = point.vY
+            let newVX: number = point.vX
+            let newVY: number = point.vY
             if (point.target !== 'none') {
                 if (point.target[0] < 1) point.target[0] = 2
                 if (point.target[1] < 1) point.target[1] = 2
                 if (point.target[0] > width) point.target[0] = width - 1
                 if (point.target[1] > height) point.target[1] = height - 1
-                const deltaX = -point.x + point.target[0]
-                const deltaY = -point.y + point.target[1]
-                const hypo = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+                const deltaX: number = -point.x + point.target[0]
+                const deltaY: number = -point.y + point.target[1]
+                const hypo: number = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
                 if (hypo <= 20) {
                     point.target = 'none'
                     newVX = Math.random() - 0.5
@@ -93,7 +100,7 @@ const ParticleContainer = (props) => {
                     newVY = deltaY / 16
                 }
             }
-            let newX = point.x + newVX
+            let newX: number = point.x + newVX
             if (newX + 2 * point.r > width) {
                 newX = width - 2 * point.r
                 newVX = -Math.abs(newVX)
@@ -102,7 +109,7 @@ const ParticleContainer = (props) => {
                 newX = 1
                 newVX = Math.abs(newVX)
             }
-            let newY = point.y + newVY
+            let newY: number = point.y + newVY
             if (newY + 2 * point.r > height) {
                 newY = height - 2 * point.r
                 newVY = -Math.abs(newVY)
@@ -121,14 +128,14 @@ const ParticleContainer = (props) => {
         }
 
         if (points.length === 0) setPoints(makePoints)
-        const id = setTimeout(()=> {
-            const mouseX = props.mouseXY[0] - (windowSize[0] - width)
-            const mouseY = props.mouseXY[1]
+        const id: ReturnType<typeof setTimeout> = setTimeout(()=> {
+            const mouseX: number | null = mouseXY[0] - (windowSize[0] - width)
+            const mouseY: number | null = mouseXY[1]
             setPoints(prev => prev.map((point) => runFromMouse(point, mouseX, mouseY)))
             setPoints(prev => prev.map((point) => makeMove(point)))
         }, 16)
         return () => clearTimeout(id)
-    }, [windowSize, points, props.mouseXY, width, height])
+    }, [windowSize, points, mouseXY, width, height])
 
     return (
         <div className="particleContainer" style={styleObj}>

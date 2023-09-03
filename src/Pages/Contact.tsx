@@ -2,19 +2,27 @@ import { useState } from 'react'
 import '../styles/contact.scss'
 import emailjs from 'emailjs-com'
 
-const Contact = () => {
-    const initialState = {
+import * as React from 'react';
+
+const Contact: React.FC = () => {
+    type StateType = {
+        from_name: string
+        from_email: string
+        email_subject: string
+        message: string
+    }
+    const initialState: StateType = {
         from_name: '',
         from_email: '',
         email_subject: '',
         message: ''
     }
-    const [data, setData] = useState(initialState)
-    const [alert, setAlert] = useState('')
+    const [data, setData] = useState<StateType>(initialState)
+    const [alert, setAlert] = useState<string>('')
 
-    const send = (e) => {
+    const send: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault()
-        emailjs.sendForm('service_107kr56', 'template_ln5dgmy', e.target, 'mcZ3KFKg2_99Q-qhx')
+        emailjs.sendForm('service_107kr56', 'template_ln5dgmy', e.currentTarget, 'mcZ3KFKg2_99Q-qhx')
             .then((res) => {
                 setAlert('Сообщение успешно доставлено')
                 setTimeout(() => {
@@ -28,7 +36,7 @@ const Contact = () => {
             })
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
         setData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
@@ -38,7 +46,7 @@ const Contact = () => {
 
     return (
         <div className="contact">
-            <p><b>Напиши <font color='red'>мне</font></b></p>
+            <p><b>Напиши <span color='red'>мне</span></b></p>
             <form className='form' onSubmit={send}>
                 <div className='formHeader'>
                     <textarea className='areaHeader' placeholder='Name' name='from_name' maxLength={25} value={data.from_name} onChange={handleInputChange}/>

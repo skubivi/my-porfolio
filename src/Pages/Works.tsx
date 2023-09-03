@@ -7,14 +7,25 @@ import flappyBird from '../Images/flappy.png'
 import math from '../Images/math.jpg'
 import { useState } from 'react'
 
-const Works = () => {
-    const [active, setActive] = useState(0)
-    const [width0, setWidth0] = useState(0)
-    const [width1, setWidth1] = useState(0)
-    const [width2, setWidth2] = useState(0)
-    const [width3, setWidth3] = useState(0)
-    const [current, setCurrent] = useState(0)
-    const projects = [
+import * as React from 'react';
+
+const Works: React.FC = () => {
+    const [active, setActive] = useState<number>(0)
+    const [width0, setWidth0] = useState<number>(0)
+    const [width1, setWidth1] = useState<number>(0)
+    const [width2, setWidth2] = useState<number>(0)
+    const [width3, setWidth3] = useState<number>(0)
+    const [current, setCurrent] = useState<number>(0)
+
+    type ProjectType = {
+        title: string
+        url: string
+        description: string
+        func: React.MouseEventHandler
+        effect?: (n: number) => void
+        image: string
+    }
+    const projects: Array<ProjectType> = [
         {
             title: "Пятнашки",
             url: 'https://skubivi.github.io/TagSolution/',
@@ -74,8 +85,9 @@ const Works = () => {
         }
     ]
 
-    const left = () => {
-        const margin = 30
+    type LeftType = () => number
+    const left: LeftType = () => {
+        const margin: number = 30
         if (current === 0) return 0
         if (current === 1) return -(width0 + margin * 0.5)
         if (current === 2) return -(width0 + width1 + margin * 1.5)
@@ -83,26 +95,25 @@ const Works = () => {
         if (current === 4) return -(width0 + width1 + width2 + width3 + margin * 3.5)
     }
 
-    const next = (e) => {
+    const next: React.MouseEventHandler = (e) => {
         setCurrent(prev => {
             if (prev < 4) return prev + 1
             return 0
         })
     }
 
-    const previous = (e) => {
+    const previous: React.MouseEventHandler = (e) => {
         setCurrent(prev => {
             if (prev === 0) return 4
             return prev - 1
         })
     }
 
-    const projectCards = []
+    const projectCards: Array<React.ReactNode> = []
     for (let i = 0; i < projects.length; i++) {
-        const currentActive = active === i
+        const currentActive: boolean = active === i
         if (i === 0) 
-            {
-                projectCards.push(
+            projectCards.push(
                 <ProjectCard 
                     key={i} 
                     title={projects[i].title} 
@@ -114,7 +125,7 @@ const Works = () => {
                     effect={projects[i].effect}
                     left={left()}
                 />
-            )}
+            )
         else
             projectCards.push(
                 <ProjectCard 
@@ -144,7 +155,8 @@ const Works = () => {
             />
         )
     }
-    const points = []
+
+    const points: Array<React.ReactNode> = []
     for (let i = 0; i < projects.length; i++) {
         let style = {}
         if (i === current) style = {backgroundColor: 'red'}
@@ -155,7 +167,7 @@ const Works = () => {
     
     return (
         <div className='works'>
-            <p className='title'><b>Мои <font color='red'>работы</font></b></p>
+            <p className='title'><b>Мои <span>работы</span></b></p>
             <div className='projectContainer'>
                 <div className='arrow' onClick={previous}>
                     <span className="material-symbols-outlined">

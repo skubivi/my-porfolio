@@ -7,6 +7,11 @@
         position: absolute;
         top: 0;
         height: 100vh;
+        .point {
+            position: absolute;
+            z-index: -1;
+            background: rgba(255, 255, 51, 0.5);
+        }
     }
 
     .explosion {
@@ -76,6 +81,9 @@
                     margin-left: 0;
                     opacity: 1;
                 }
+            }
+            span {
+                color: red;
             }
         }
         @media (max-width: 1000px) {

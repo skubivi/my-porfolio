@@ -10,6 +10,9 @@
     p {
         font-size: 48px;
         color: white;
+        span {
+            color: red
+        }
         @media (max-height: 554px) {
             display: none;
         }

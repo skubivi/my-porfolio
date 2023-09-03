@@ -1,18 +1,24 @@
 import ParticleContainer from "../Components/ParticleContainer"
 import '../styles/home.scss'
+import * as React from 'react';
 
 import roundedText from '../Images/rounded-text.png'
 import roundedStar from '../Images/circle-star.svg'
 
-const Home = (props) => {
-    const handleClick = (e) => {
-        props.redirect('/works')
+type HomeType = {
+    redirect: TransitionFuncType
+    mouseXY: MouseXYType
+}
+
+const Home: React.FC<HomeType> = ({redirect, mouseXY}) => {
+    const handleClick = (e: React.MouseEvent) => {
+        redirect('/works')
     }
     return (
         <div className="home">
-            <ParticleContainer mouseXY={props.mouseXY} />
+            <ParticleContainer mouseXY={mouseXY} />
             <div>
-                <p id="title"><b>Frontend React <font color='red'>Разработчик</font></b></p>
+                <p id="title"><b>Frontend React <span>Разработчик</span></b></p>
                 <div className="imageContainer" onClick={handleClick}>
                     <img className="text" src={roundedText} alt="" />
                     <img className='star' src={roundedStar} alt="" />

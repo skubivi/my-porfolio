@@ -6,23 +6,25 @@ import Home from './Pages/Home';
 import About from './Pages/About';
 import Works from './Pages/Works';
 import Contact from './Pages/Contact';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent, MouseEventHandler } from 'react';
 import useWindowSize from './Hooks/useWindowSize';
 import Transitions from './Components/Transitions';
 import topLeftImg from './Images/top-left-img.png'
 import circlesImg from './Images/circles.png'
+import * as React from 'react';
 
-function App() {
-  let mouseXY = []
-  const onMouseMoveHandler = (e) => {
+const App: React.FC = () => {
+  let mouseXY: MouseXYType = [null, null]
+  const onMouseMoveHandler: MouseEventHandler = (e: MouseEvent) => {
     mouseXY[0] = e.pageX
     mouseXY[1] = e.pageY
   }
-  const windowSize = useWindowSize()
+  const windowSize: WindowSizeType = useWindowSize()
 
-  const location = useLocation()
-  const [link, setLink] = useState(location.pathname)
-  const transition = (link) => {
+  const location: LocationState = useLocation()
+  const [link, setLink] = useState<string>(location.pathname)
+  
+  const transition: TransitionFuncType = (link: string) => {
     setLink(link)
   }
 
@@ -35,14 +37,14 @@ function App() {
       <div className='wrapper'>
         <Header />
         <Routes>
-          <Route exact path='/' Component={() => (<Home mouseXY={mouseXY} redirect={transition}/>)} />
+          <Route path='/' Component={() => (<Home mouseXY={mouseXY} redirect={transition}/>)} />
           <Route path='/about' Component={About} />
           <Route path='/works' Component={Works} />
           <Route path='contact' Component={Contact} />
         </Routes>
         <Transitions link={link}/>
       </div>
-      <Navbar handleClick={transition} active={true}/>
+      <Navbar transition={transition} active={true}/>
       <img className="topLeftImg" src={topLeftImg} alt='' />
       <img className="circlesImg" src={circlesImg} alt='' />
     </div>
